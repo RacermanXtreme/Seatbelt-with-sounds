@@ -112,10 +112,12 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(100)
 		if (IsPlayerDead(PlayerId()) and isUiOpen == true) or IsPauseMenuActive() then
-			SendNUIMessage({
-				displayWindow = 'false'
-			})
-			isUiOpen = false
+			if not seatbelt then --Should fix the glitch where opening the pause menu while buckled shows the no belt alert
+				SendNUIMessage({
+					displayWindow = 'false'
+				})
+				isUiOpen = false
+			end  --Close the if not seatbelt condition
 		end    
 	end
 end)
